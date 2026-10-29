@@ -54,6 +54,10 @@ One peer per segment provides a transparent teaching calculation, but is not a r
 
 ## 3. WACC
 
+WACC is the blended annual return required by lenders and shareholders. It is used here to translate future operating cash flows into today's value. Beta ($\beta$) measures sensitivity to market movements, rather than every kind of business risk. A levered beta ($\beta_L$) includes the effect of borrowing; an unlevered beta ($\beta_U$) removes that financing effect under the stated formula assumptions. This lets the analysis first compare business risk, then apply Xiaomi's assumed borrowing level.
+
+In the equations below, $r_f$ is the risk-free rate, $ERP$ is the equity risk premium, $k_E$ is shareholders' required return, and $k_D$ is the pre-tax borrowing cost. $T_X$ is Xiaomi's assumed tax rate. Rates enter calculations as decimals: 25% is 0.25. The summation sign $\sum$ means “add the specified business contributions.”
+
 Peer betas are unlevered using book interest-bearing debt as a practical proxy for market debt, divided by equity market capitalization. Ideally both debt and equity should be measured at market value on an aligned valuation date. Total liabilities are not treated as interest-bearing debt.
 
 For peer company $j$, unlever equity beta as follows:
@@ -180,6 +184,8 @@ WACC is not used to discount the output of this multiples calculation. The multi
 
 ### Illustrative equity bridge
 
+Enterprise value (EV) refers here to the value of operating businesses available to all capital providers. Equity value ($V_E$) is the amount attributable to ordinary shareholders after adjusting for cash, debt and other claims. Non-controlling interests (NCI) represent outside investors' claims on consolidated subsidiaries. The bridge prevents operating-business value from being mistaken for the value of ordinary shares.
+
 The workbook adds 2017 unrestricted cash of RMB11,563.282 million and subtracts current borrowings of RMB3,550.801 million, non-current borrowings of RMB7,251.312 million, related-party loans of RMB51.336 million and book non-controlling interests of RMB61.670 million.
 
 It assumes the preferred shares convert, excludes net IPO cash proceeds, and excludes other investments and adjustments. These exclusions are assumptions, not findings that the amounts are zero or immaterial. Book non-controlling interests are only a proxy for the claim's market value.
@@ -214,6 +220,8 @@ Because the model combines a 2017 balance-sheet bridge, case peer data with unsp
 
 ### Discounted cash flow
 
+The calculation proceeds from sales to operating profit, then to cash available to both lenders and shareholders, and finally to its present value. EBIT means earnings before interest and tax; NOPAT means operating profit after the model's operating taxes. D&A ($DA$) is depreciation and amortization, capex is capital spending, and WC is the selected operating working-capital balance. FCFF is free cash flow to the firm, before payments to lenders or shareholders. Interest expense and debt repayments are therefore not deducted in FCFF; financing is reflected in WACC and the equity bridge.
+
 The DCF supplements the multiples estimate with an explicit operating forecast for 2018–2022. Its discounting baseline is **31 December 2017**, with cash flows discounted at year-end. It does not pretend to place the baseline on the July 2018 IPO date without a timing adjustment. The self-contained workbook includes a live WACC calculation, inputs, historical calibration and the forecast.
 
 Smartphone revenue grows at **6.9%**, IoT/lifestyle revenue at **21.3%**, and internet-services revenue at **15.9%** per year during the forecast period, using the teaching-case assumptions. Segment cost-of-sales ratios remain at 2017 levels. Selling, administrative and R&D ratios use the average of their 2015–2017 percentages of group revenue, applied to forecast revenue from the three principal businesses.
@@ -247,6 +255,8 @@ FCFF_t=NOPAT_t+DA_t-Capex_t-\Delta WC_t
 $$
 
 The tax formula does not assume an immediate cash refund when EBIT is negative. The D&A add-back occurs once after EBIT.
+
+D&A reduces accounting profit without being a current-period cash payment, so it is added back. Capex is cash committed to long-lived assets, so it is deducted. An increase in WC ties up cash, so that increase is also deducted. This explains the signs in the FCFF equation.
 
 For a transparent reinvestment estimate, selected net fixed assets comprise net property/equipment and intangibles, projected at their 2017 intensity relative to core revenue. Estimated capex equals the increase in that net asset balance plus D&A. This is a proxy that excludes land rights, acquisitions, disposals, FX and other asset changes; it is not reported cash capex and does not purport to model all group investment requirements.
 
@@ -334,8 +344,10 @@ $$
 
 Forecast and terminal cash flows are discounted to the end-2017 baseline:
 
+In the next equations, $t$ is the number of years after 31 December 2017: $t=1$ means 2018 and $t=5$ means 2022. DF is the discount factor and PV means present value. TV is terminal value: the end-2022 value of operating cash flows from 2023 onward. Its first cash flow is therefore 2023 FCFF, and TV is discounted five years, just like the 2022 forecast cash flow. The separate terminal term does not count the 2022 cash flow twice.
+
 $$
-DF_t=\frac{1}{(1+WACC)^t},\qquad PV(FCFF_t)=FCFF_t\times DF_t
+DF_t=\frac{1}{(1+WACC)^t},\qquad PV(FCFF_{2017+t})=FCFF_{2017+t}\times DF_t
 $$
 
 $$
